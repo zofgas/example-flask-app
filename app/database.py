@@ -1,8 +1,11 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine("sqlite:///./test.db")
+engine = create_engine(
+    os.environ.get("POSTGRES_DB", "sqlite:///./test.db")
+)
 
 db_session = scoped_session(
     sessionmaker(
